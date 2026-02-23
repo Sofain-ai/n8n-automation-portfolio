@@ -1,0 +1,131 @@
+{
+  "name": "01-Gmail-Autmtion",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -112,
+        -80
+      ],
+      "id": "b832903e-1d6c-4144-80d3-fe68aac1d2a3",
+      "name": "When chat message received",
+      "webhookId": "7a4dbd58-087a-4779-821e-ebb161ad548f"
+    },
+    {
+      "parameters": {
+        "sendTo": "zawahrazefo@gmail.com",
+        "subject": "Lieferung",
+        "message": "={{ $json.chatInput }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        176,
+        -80
+      ],
+      "id": "1638ec7f-e24d-4f6f-af1f-d4334d5fce9c",
+      "name": "Send a message",
+      "webhookId": "4842941d-2810-4983-96be-9a08ad782666",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Zi6Ep40t2Gv27B7g",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1p0m0WAlpDHjw_wRHX3U3IlfTYC0HtPzW41aAycSpc4M",
+          "mode": "list",
+          "cachedResultName": "Test-001",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1p0m0WAlpDHjw_wRHX3U3IlfTYC0HtPzW41aAycSpc4M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 462744059,
+          "mode": "list",
+          "cachedResultName": "Tabellenblatt2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1p0m0WAlpDHjw_wRHX3U3IlfTYC0HtPzW41aAycSpc4M/edit#gid=462744059"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Message": "={{ $json.chatInput }}"
+          },
+          "matchingColumns": [
+            "Message"
+          ],
+          "schema": [
+            {
+              "id": "Message",
+              "displayName": "Message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        176,
+        144
+      ],
+      "id": "d7046e2c-9d64-4240-a00d-8deeb4f4c4b2",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "D6H0gKIHySXwqK1A",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "946da9de-9f28-4e1f-a351-024b7816b599",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ecdf021cd80839829355473b89e69f5ae847731c163bfa9de1b2735a8a7095cb"
+  },
+  "id": "2b8a3HkofvoZ2rMc",
+  "tags": []
+}
