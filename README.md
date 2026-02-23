@@ -25,3 +25,6 @@ Setup:
 
 Tech:
 n8n, Webhooks, Google Sheets API
+
+
+![Workflow](docs/workflow.png)
